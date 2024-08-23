@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "wavsurfer"
+name = "wavmerger"
 version = "0.1.0"
 description = ""
 authors = ["moreaupascal56 <moreaupascal56@gmail.com>"]

@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 from numpy.testing import assert_array_equal
 
-from wavsurfer import WavFile, concat_wav, concat_wav_list
+from wavmerger import WavFile, concat_wav, concat_wav_list
 
 
 @pytest.fixture

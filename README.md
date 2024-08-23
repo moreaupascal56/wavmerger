@@ -1,4 +1,4 @@
-# WavSurfer: `.wav` file merger
+# WavMerger: `.wav` file merger
 
 This is a library to concatenate (merge) `.wav` files. 
 For example if you used the google text-to-speech API on several `.txt`, resulting into several `.wav` files and you want to concatenate everything into a single (big) `.wav` file
