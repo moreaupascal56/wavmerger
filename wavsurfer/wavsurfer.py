@@ -54,6 +54,7 @@ def concat_wav(wav1: WavFile, wav2: WavFile) -> WavFile:
 
     Args:
         wav1 (WavFile): WavFile
+        
         wav2 (WavFile): WavFile
 
     Raises:
