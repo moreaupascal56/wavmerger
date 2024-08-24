@@ -6,7 +6,6 @@ from tests.helpers import WavFileEquality
 from wavmerger import WavFile, concat_wav, concat_wav_list
 
 
-
 @pytest.fixture
 def get_rate_data() -> dict:
     """Get example rate and data
@@ -43,7 +42,6 @@ def create_wav_file(temp_dir, get_rate_data) -> str:
 
 class TestWavFile:
     """Tests the WavFile class"""
-
 
     def test_init_from_rate_data(self, get_rate_data):
         """Tests WavFile initialization with rate and data
