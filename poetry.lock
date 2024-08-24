@@ -179,6 +179,16 @@ files = [
 colors = ["colorama (>=0.4.6)"]
 
 [[package]]
+name = "logging"
+version = "0.4.9.6"
+description = "A logging module for Python"
+optional = false
+python-versions = "*"
+files = [
+    {file = "logging-0.4.9.6.tar.gz", hash = "sha256:26f6b50773f085042d301085bd1bf5d9f3735704db9f37c1ce6d8b85c38f2417"},
+]
+
+[[package]]
 name = "mypy-extensions"
 version = "1.0.0"
 description = "Type system extensions for programs checked with the mypy type checker."
@@ -405,4 +415,4 @@ test = ["Cython", "array-api-strict (>=2.0)", "asv", "gmpy2", "hypothesis (>=6.3
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "90ceb67f739937b3a9fd379237f200a6a9ab21ffb449b8dc85b52e4b31a7b9d0"
+content-hash = "b90bbbe7ae344dbe207a19e24fe9d031240db7dc8898b5ee227d68d05e6477b7"
