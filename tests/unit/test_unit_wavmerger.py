@@ -3,7 +3,7 @@ import pytest
 from numpy.testing import assert_array_equal
 
 from tests.helpers import WavFileEquality
-from wavmerger import WavFile, concat_wav, concat_wav_list
+from wavmerger import WavFile, merge_wav, merge_wav_list
 
 
 @pytest.fixture
@@ -99,8 +99,8 @@ class TestWavOperations:
             ),
         ],
     )
-    def test_concat_wav(self, wav1, wav2, expected):
-        """Tests concat_wav function
+    def test_merge_wav(self, wav1, wav2, expected):
+        """Tests merge_wav function
 
         Args:
             wav1 (_type_): WavFile
@@ -109,9 +109,9 @@ class TestWavOperations:
         """
         if not expected:
             with pytest.raises(ValueError):
-                concat_wav(wav1, wav2)
+                merge_wav(wav1, wav2)
         else:
-            WavFileEquality(concat_wav(wav1, wav2), expected)
+            WavFileEquality(merge_wav(wav1, wav2), expected)
 
     @pytest.mark.parametrize(
         "wavlist,expected",
@@ -140,8 +140,8 @@ class TestWavOperations:
             ),
         ],
     )
-    def test_concat_wav_list(self, wavlist, expected):
-        """Tests concat_wav function
+    def test_merge_wav_list(self, wavlist, expected):
+        """Tests merge_wav function
 
         Args:
             wavlist (_type_): list of WavFiles
@@ -149,6 +149,6 @@ class TestWavOperations:
         """
         if not expected:
             with pytest.raises(ValueError):
-                concat_wav_list(wavlist)
+                merge_wav_list(wavlist)
         else:
-            WavFileEquality(concat_wav_list(wavlist), expected)
+            WavFileEquality(merge_wav_list(wavlist), expected)

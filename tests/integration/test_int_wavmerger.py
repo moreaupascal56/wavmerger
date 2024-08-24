@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 
 from tests.helpers import WavFileEquality
-from wavmerger import WavFile, concat_wav_in_dir
+from wavmerger import WavFile, merge_wav_in_dir
 
 
 @pytest.fixture
@@ -21,18 +21,18 @@ def get_wav_test_data() -> tuple[Path, Path]:
 @pytest.mark.filterwarnings(
     "ignore"
 )  # A warning is raised because of the way the test data is created, let's ignore it
-def test_concat_wav_in_dir(get_wav_test_data, temp_dir):
-    """Tests concat_wav_in_dir function
+def test_merge_wav_in_dir(get_wav_test_data, temp_dir):
+    """Tests merge_wav_in_dir function
 
     Args:
         get_wav_test_data (_type_): fixture
         temp_dir (_type_): fixture
     """
 
-    write_file_name = "output_test_concat_wav_in_dir.wav"
+    write_file_name = "output_test_merge_wav_in_dir.wav"
     original_data_path, splitted_data_path = get_wav_test_data
 
-    concat_wav_in_dir(
+    merge_wav_in_dir(
         dirpath=splitted_data_path,
         write_file_name=write_file_name,
         write_file_dir=temp_dir,

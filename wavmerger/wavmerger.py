@@ -47,7 +47,7 @@ class WavFile:
         wavfile.write(filename=filepath, rate=self.rate, data=self.data)
 
 
-def concat_wav(wav1: WavFile, wav2: WavFile) -> WavFile:
+def merge_wav(wav1: WavFile, wav2: WavFile) -> WavFile:
     """Concatenate 2 .wav files.
     example:
         WavFile1 is a .wav file of someone saying "hello"
@@ -73,7 +73,7 @@ def concat_wav(wav1: WavFile, wav2: WavFile) -> WavFile:
         return WavFile(rate=wav1.rate, data=np.array(list(chain(wav1.data, wav2.data))))
 
 
-def concat_wav_list(wavlist: list[WavFile]) -> WavFile:
+def merge_wav_list(wavlist: list[WavFile]) -> WavFile:
     """Concatenate WavFile from a list into a new WavFile, it keeps the list order.
 
 
@@ -85,11 +85,11 @@ def concat_wav_list(wavlist: list[WavFile]) -> WavFile:
     """
     wav = wavlist[0]
     for wavfile in wavlist[1:]:
-        wav = concat_wav(wav, wavfile)
+        wav = merge_wav(wav, wavfile)
     return wav
 
 
-def concat_wav_in_dir(
+def merge_wav_in_dir(
     dirpath: str, write_file_name: str = None, write_file_dir: str = None
 ) -> WavFile:
     """Merge all .wav files from a directory. It will search all .wav files recursively in subfolders.
@@ -111,7 +111,7 @@ def concat_wav_in_dir(
     for wav_file in sorted(dirpath.rglob("*.wav")):
         wav_list.append(WavFile(filepath=wav_file))
 
-    wav_out = concat_wav_list(wavlist=wav_list)
+    wav_out = merge_wav_list(wavlist=wav_list)
 
     if write_file_name:
         if write_file_dir:
