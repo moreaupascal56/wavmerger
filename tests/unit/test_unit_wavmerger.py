@@ -2,20 +2,8 @@ import numpy as np
 import pytest
 from numpy.testing import assert_array_equal
 
+from tests.helpers import WavFileEquality
 from wavmerger import WavFile, concat_wav, concat_wav_list
-
-
-@pytest.fixture
-def temp_dir(tmp_path) -> str:
-    """Creates a temporary directory for tests
-
-    Args:
-        tmp_path (_type_): tmp_path fixture
-
-    Returns:
-        str: tmp_path
-    """
-    return tmp_path
 
 
 @pytest.fixture
@@ -54,19 +42,6 @@ def create_wav_file(temp_dir, get_rate_data) -> str:
 
 class TestWavFile:
     """Tests the WavFile class"""
-
-    def WavFileEquality(wav: WavFile, expected: dict):
-        """An equality test for WavFiles
-
-        Args:
-            wav (WavFile): WavFile to test
-            expected (dict): expected values as a dict
-        """
-        d = wav.to_dict()
-        assert d["rate"] == expected["rate"]
-        assert d["duration"] == expected["duration"]
-        assert_array_equal(d["data"], expected["data"])
-        assert d.keys() == expected.keys()
 
     def test_init_from_rate_data(self, get_rate_data):
         """Tests WavFile initialization with rate and data
@@ -136,7 +111,7 @@ class TestWavOperations:
             with pytest.raises(ValueError):
                 concat_wav(wav1, wav2)
         else:
-            TestWavFile.WavFileEquality(concat_wav(wav1, wav2), expected)
+            WavFileEquality(concat_wav(wav1, wav2), expected)
 
     @pytest.mark.parametrize(
         "wavlist,expected",
@@ -176,4 +151,4 @@ class TestWavOperations:
             with pytest.raises(ValueError):
                 concat_wav_list(wavlist)
         else:
-            TestWavFile.WavFileEquality(concat_wav_list(wavlist), expected)
+            WavFileEquality(concat_wav_list(wavlist), expected)

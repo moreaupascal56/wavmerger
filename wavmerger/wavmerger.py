@@ -1,3 +1,5 @@
+import logging
+
 import numpy as np
 from scipy.io import wavfile
 
@@ -85,3 +87,38 @@ def concat_wav_list(wavlist: list[WavFile]) -> WavFile:
     for wavfile in wavlist[1:]:
         wav = concat_wav(wav, wavfile)
     return wav
+
+
+def concat_wav_in_dir(
+    dirpath: str, write_file_name: str = None, write_file_dir: str = None
+) -> WavFile:
+    """Merge all .wav files from a directory. It will search all .wav files recursively in subfolders.
+    Can create the output file with the write_file_name option, it will be created in the
+    write_file_dir if specified, in the source dir otherwise.
+
+    Args:
+        dirpath (str): Path of the source directory containing the .wav files.
+        write_file_name (str, optional): Name of the file to write. Defaults to None.
+        write_file_dir (bool, optional): Name of the directory where to write the file. Defaults to None.
+
+    Returns:
+        WavFile: WavFile containing all the merged .wav from the source directory.
+    """
+    from pathlib import Path
+
+    dirpath: Path = Path(dirpath)
+    wav_list: list[WavFile] = []
+    for wav_file in sorted(dirpath.rglob("*.wav")):
+        wav_list.append(WavFile(filepath=wav_file))
+
+    wav_out = concat_wav_list(wavlist=wav_list)
+
+    if write_file_name:
+        if write_file_dir:
+            filepath = Path(write_file_dir).joinpath(write_file_name)
+        else:
+            filepath = dirpath.joinpath(write_file_name)
+        wav_out.write(filepath=filepath)
+        logging.info(f"Output file created: {filepath}")
+
+    return wav_out
